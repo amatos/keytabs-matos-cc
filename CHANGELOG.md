@@ -20,3 +20,11 @@ All notable changes to this project will be documented in this file.
   and manual-decrypt workflows for this repo
 - `CLAUDE.md` — project directives covering the same workflow, plus the
   rule that plaintext secrets belong in `nix-secrets` instead
+- `keytab-huginn.age` — host keytab for `huginn`, deployed to
+  `/etc/krb5.keytab`
+- `secrets.nix` — added `huginn` host age key as a recipient
+
+### Changed
+
+- `README.md` — Recipients table was missing `huginn`, Secrets table was
+  missing `keytab-huginn.age`; both added to match `secrets.nix`

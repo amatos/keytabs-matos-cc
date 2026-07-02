@@ -14,6 +14,7 @@ This repo was split out of `nix-secrets`, which now holds only non-keytab secret
 | `codex` | Host key (`/etc/age/host-key`) | `age1786r092jkepdahryx7t9kru8txuvreh3f2pgtvrv3u5hmjxjjy3st9udnl` |
 | `gammu` | Host key (`/etc/age/host-key`) | `age12vhj5z6zepnz7uyzks23p6rgwa7rudja7ectsrl89zf96nnmfcnq264972` |
 | `porkchop` | Host key (`/etc/age/host-key`) | `age1yegmaunkewrxj3v6lt86nalta0xq5gq7dpcxrggqp8p7nlzdde4qsnq5jz` |
+| `huginn` | Host key (`/etc/age/host-key`) | `age1je5xg9s90g8l0307xpphclxj3fugvkl59ne9yna46lne9fw0wfpq59lzux` |
 
 The YubiKey identity stub is stored in `age-yubikey-identity-9ca1fbf9.txt`. Touch policy is **cached** (one touch valid for 15 seconds); PIN is not required.
 
@@ -25,6 +26,7 @@ The YubiKey identity stub is stored in `age-yubikey-identity-9ca1fbf9.txt`. Touc
 | `keytab-gammu.age` | Host keytab for `gammu`, deployed to `/etc/krb5.keytab` |
 | `keytab-porkchop.age` | Host keytab for `porkchop`, deployed to `/etc/krb5.keytab` |
 | `keytab-ldap-porkchop.age` | SASL/GSSAPI keytab for the `ldap/` service principal on `porkchop`, deployed for `services.kerberosLdap.ldap.saslKeytabFile` |
+| `keytab-huginn.age` | Host keytab for `huginn`, deployed to `/etc/krb5.keytab` |
 
 Each host's keytab is wired into nixie via `nixie.krb5.keytabFile` (see `modules/common/krb5-client.nix`), e.g.:
 
