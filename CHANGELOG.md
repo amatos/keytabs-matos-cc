@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+---
+
+## 26.07.02
+
 ### Security
 
 - **URGENT — credential exposure.** The commit that added the backup
@@ -50,7 +54,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- `secrets.nix` — rotated the key for `codex
+- `secrets.nix` — rotated the `codex` host recipient key; `keytab-codex.age`
+  re-encrypted (`ragenix -e`) accordingly
 - `flake.nix` — dropped `x86_64-darwin` from `supportedSystems`; that
   platform/architecture combination is being deprecated
 - `secrets.nix` — rotated the primary `alberth` recipient away from
