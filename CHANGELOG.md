@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- `flake.nix`, `CLAUDE.md`, `README.md` — updated self-references from
+  `keytabs-matos-cc` to `nix-keytabs-matos-cc`, matching the same rename
+  on GitHub.
 - `flake.nix` — dropped the unused `self` function arg flagged by nixd.
 
 ---

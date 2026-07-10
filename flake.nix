@@ -1,5 +1,5 @@
 {
-  description = "keytabs-matos-cc — age-encrypted Kerberos keytabs for the nixie NixOS + nix-darwin configuration";
+  description = "nix-keytabs-matos-cc — age-encrypted Kerberos keytabs for the nixie NixOS + nix-darwin configuration";
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0"; # Stable Nixpkgs (use 0.1 for unstable)
@@ -81,7 +81,7 @@
         in
         {
           default = pkgs.mkShell {
-            name = "keytabs-matos-cc";
+            name = "nix-keytabs-matos-cc";
             packages = [ pkgs.nixfmt ];
             # Installs git hooks into .git/hooks when entering the devShell
             inherit (preCommitCheck.${system}) shellHook;

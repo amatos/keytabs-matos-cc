@@ -40,7 +40,7 @@ recovery key has no hardware component and is kept offline.
 Each host's keytab is wired into nixie via `nixie.krb5.keytabFile` (see `modules/common/krb5-client.nix`), e.g.:
 
 ```nix
-nixie.krb5.keytabFile = "${keytabs-matos-cc}/keytab-codex.age";
+nixie.krb5.keytabFile = "${nix-keytabs-matos-cc}/keytab-codex.age";
 ```
 
 ---
@@ -60,7 +60,7 @@ Add an entry mapping the new filename to the list of recipient keys that should 
 ### 2. Create (or edit) the encrypted file
 
 ```bash
-cd /path/to/keytabs-matos-cc
+cd /path/to/nix-keytabs-matos-cc
 ragenix -e keytab-newhost.age
 ```
 
@@ -74,7 +74,7 @@ Touch the YubiKey when prompted (the LED will blink).
 In the host's `default.nix`, set:
 
 ```nix
-nixie.krb5.keytabFile = "${keytabs-matos-cc}/keytab-newhost.age";
+nixie.krb5.keytabFile = "${nix-keytabs-matos-cc}/keytab-newhost.age";
 ```
 
 ### 4. Commit both repos
@@ -115,7 +115,7 @@ in ...
 ### 3. Rekey all secrets
 
 ```bash
-cd /path/to/keytabs-matos-cc
+cd /path/to/nix-keytabs-matos-cc
 ragenix --rekey
 ```
 
@@ -152,7 +152,7 @@ A devShell is provided for this repo's own tooling (`nixfmt`, plus the pre-commi
 nix develop
 
 # Or, if direnv is installed and .envrc is allowed:
-cd keytabs-matos-cc   # shell loads automatically
+cd nix-keytabs-matos-cc   # shell loads automatically
 ```
 
 To activate direnv:

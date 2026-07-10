@@ -13,7 +13,7 @@ of the phrasing reads.
 keytabs-matos.cc holds age-encrypted **binary** Kerberos keytabs for the `MATOS.CC`
 realm, used by the [nixie](https://github.com/amatos/nixie) NixOS + nix-darwin
 configuration. It is a plain git repo, not a flake (`flake = false` in nixie's
-`flake.nix`), referenced there as the `keytabs-matos-cc` input.
+`flake.nix`), referenced there as the `nix-keytabs-matos-cc` input.
 
 This repo was split out of `nix-secrets`, which holds only non-binary secrets (SSH
 keys, tokens, passwords, etc). It exists specifically because git diffs binary files
@@ -63,7 +63,7 @@ is required once per session for each YubiKey.
 2. **Create (or edit) the encrypted file:**
 
    ```bash
-   cd /path/to/keytabs-matos-cc
+   cd /path/to/nix-keytabs-matos-cc
    ragenix -e keytab-newhost.age
    ```
 
@@ -76,7 +76,7 @@ is required once per session for each YubiKey.
    - Host keytab deployed to `/etc/krb5.keytab` — in the host's `default.nix`:
 
      ```nix
-     nixie.krb5.keytabFile = "${keytabs-matos-cc}/keytab-newhost.age";
+     nixie.krb5.keytabFile = "${nix-keytabs-matos-cc}/keytab-newhost.age";
      ```
 
      (see `modules/common/krb5-client.nix` for the option that consumes this)
@@ -85,11 +85,11 @@ is required once per session for each YubiKey.
      `services.kerberosLdap.*` option directly, e.g.:
 
      ```nix
-     saslKeytabFile = "${keytabs-matos-cc}/keytab-ldap-newhost.age";
+     saslKeytabFile = "${nix-keytabs-matos-cc}/keytab-ldap-newhost.age";
      ```
 
    If this is the first keytab nixie consumes for a *new* host file, make sure that
-   file declares `keytabs-matos-cc` in its function arguments (it's already in
+   file declares `nix-keytabs-matos-cc` in its function arguments (it's already in
    `sharedSpecialArgs`, so no `flake.nix` change is needed unless the input itself is
    missing). See nixie's `CLAUDE.md` ("Wiring an external secrets repo into nixie")
    for the full pattern.
@@ -126,7 +126,7 @@ is required once per session for each YubiKey.
 3. Rekey all secrets:
 
    ```bash
-   cd /path/to/keytabs-matos-cc
+   cd /path/to/nix-keytabs-matos-cc
    ragenix --rekey
    ```
 
