@@ -6,6 +6,37 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## 26.07.05
+
+### Added
+
+- `secrets.nix` — added the `muninn` recipient key and
+  `keytab-muninn.age`/`keytab-ldap-muninn.age` entries, prerequisite for
+  moving Kerberos+LDAP from porkchop to muninn (nixie's ARCHITECTURE.md
+  §10 Stage 2). Reused muninn's existing `nix-secrets` pubkey, since both
+  repos key off the same `/etc/age/host-key` identity per host.
+- `keytab-muninn.age` (host keytab, `host/muninn.matos.cc`) and
+  `keytab-ldap-muninn.age` (SASL/GSSAPI keytab, `ldap/muninn.ts.matos.cc`)
+  for muninn's Kerberos+LDAP role, encrypted against the recipients
+  declared above.
+
+### Fixed
+
+- `keytab-ldap-muninn.age`, `keytab-ldap-porkchop.age` — regenerated with
+  an added `ldap/<host>.tail2269e5.ts.net@MATOS.CC` alias principal
+  alongside the existing `ldap/<host>.ts.matos.cc` one. Fixes a
+  pre-existing bug in the realm's GSSAPI/SASL LDAP bind, discovered while
+  validating nixie's porkchop→muninn migration (ARCHITECTURE.md §10 Stage
+  2): Cyrus SASL's GSSAPI client plugin builds its target service
+  principal from the peer's *reverse-DNS* name, not the connect hostname,
+  and Tailscale's PTR records always answer with the tailnet's native
+  name rather than the `ts.matos.cc` alias — so no client could ever
+  obtain a ticket for the principal that was actually configured. See
+  nixie's matching commit for the full explanation and the companion
+  `olcSaslHost`/`saslAuthzRegexp` fixes.
+
+---
+
 ## 26.07.04
 
 ### Added
